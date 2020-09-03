@@ -1,0 +1,29 @@
+.logo {
+  /* height: 130px; */
+  padding: 15px;
+  margin: auto;
+}
+
+.header {
+  background: white;
+  height: fit-content;
+  display: block;
+}
+
+.footer {
+  background: #626871;
+  padding: 24px 0px;
+  margin-top: 4em;
+  font-size: 1em;
+  color: #00000080;
+}
+
+.footer a {
+  color: #000;
+}
+
+.footerlogo {
+  width: 100px;
+  height: 100px;
+  opacity: 0.5;
+}
