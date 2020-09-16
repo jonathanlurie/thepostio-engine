@@ -77,8 +77,7 @@ class Post extends React.Component {
     // const router = useRouter()
     
     const properties = articleData.data.properties
-    const date = parseISO(properties.date)
-    const niceDate = format(date, 'LLLL d, yyyy')
+    const niceDate = properties.date ? format(parseISO(properties.date), 'LLLL d, yyyy') : null
 
     let headerCard = null
 
@@ -92,7 +91,7 @@ class Post extends React.Component {
           >
             <div className={styles.titleuser}>{userData.data.author.displayName}</div>
             <h1 className={styles.title}>{properties.title}</h1>
-            <div className={styles.nicedate}>{niceDate}</div>
+            {niceDate ? <div className={styles.nicedate}>{niceDate}</div> : null}
           </div>
           <div className={styles.headercarddarkgb} />
           <div
@@ -120,8 +119,6 @@ class Post extends React.Component {
         </div>
       )
     }
-
-    
 
     const cardActions = [
       <Link href={`/${username}`}><Tooltip title='More articles' color='blue'>
@@ -225,8 +222,12 @@ export async function getServerSideProps(context) {
   const provider = 'github'
   const urlQuery = context.query
   // console.log(urlQuery)
+
+  console.time('c')
   let userData = await getAuthorData(urlQuery.username, provider)
   let articleData = await getPostData(urlQuery.username, urlQuery.postid, provider)
+  console.log('query time (post):')
+  console.timeEnd('c')
 
   if (!userData.error && !articleData.error) {
     // check if not done by a robot

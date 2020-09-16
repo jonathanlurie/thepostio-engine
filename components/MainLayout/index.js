@@ -1,8 +1,9 @@
-import { Layout, Row, Col, Drawer, Space } from 'antd'
+import { Layout, Row, Col, Button, Menu, Dropdown } from 'antd'
 import { MenuOutlined, GithubOutlined } from '@ant-design/icons'
 import styles from './mainlayout.module.css'
 import Link from 'next/link'
 import Head from 'next/head'
+import TopLeftMenu from '../TopLeftMenu'
 const { Header, Footer, Sider, Content } = Layout
 
 
@@ -50,21 +51,41 @@ class MainLayout extends React.Component {
         <Header
           className={styles.header}
         >
-
-          <Col
-            size={24}
-            justify='center'
+          <Row
+            // align="middle"
           >
-            <Link href='/'><a>
-              <img
-                className={styles.logo}
-                width={130}
-                height={130}
-                src='/images/logo.png'
-                alt='The Post logo'
-              />
-            </a></Link>
-          </Col>
+            <Col
+              span={8}
+            >
+              <TopLeftMenu/>
+            </Col>
+            <Col
+              span={8}
+              justify='center'
+            >
+              <Link href='/'><a>
+                <img
+                  className={styles.logo}
+                  width={130}
+                  height={130}
+                  src='/images/logo.png'
+                  alt='The Post logo'
+                />
+              </a></Link>
+            </Col>
+
+            <Col
+              span={8}
+              justify='right'
+              style={{
+                textAlign: 'right'
+              }}
+            >
+              <Link href='/thepostio/getting-started'><a>
+                  <Button type="link" style={{textAlign: 'center'}}>How to publish ?</Button>
+              </a></Link>
+            </Col>
+          </Row>
         </Header>
         
         <Row

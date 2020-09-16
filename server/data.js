@@ -44,8 +44,9 @@ export async function getPostData(username, postid, provider = 'github') {
     error: null,
   }
 
+  console.time("c1")
   const articleRes = await fetch(url)
-
+  console.timeEnd("c1")
   if (!articleRes.ok) {
     articleData.error = 'This article does not exist'
   }
@@ -53,6 +54,8 @@ export async function getPostData(username, postid, provider = 'github') {
   try {
     // markdown business
     const textContent = await articleRes.text()
+    
+    console.time("c2")
     const matterResult = matter(textContent)
     const makdownContent = markdownReplaceImageURL(matterResult.content.trim(), folderUrl)
 
@@ -61,7 +64,7 @@ export async function getPostData(username, postid, provider = 'github') {
     if ('date' in matterResult.data && matterResult.data.date instanceof Date) {
       matterResult.data.date = DateTools.getIso8601z({date: matterResult.data.date, onlyDate: true})
     } else if(!('date' in matterResult.data)) {
-      matterResult.data.date = DateTools.getIso8601z({onlyDate: true})
+      matterResult.data.date = null //DateTools.getIso8601z({onlyDate: true})
     }
 
     // fix cover to relative path
@@ -83,6 +86,7 @@ export async function getPostData(username, postid, provider = 'github') {
       html: mdToHtml(makdownContent),
       properties: matterResult.data
     }
+    console.timeEnd("c2")
 
   } catch(err) {
     articleData.error = err.message
@@ -119,7 +123,7 @@ export async function getPostMetadata(username, postid, provider = 'github') {
     if ('date' in matterResult.data && matterResult.data.date instanceof Date) {
       matterResult.data.date = DateTools.getIso8601z({date: matterResult.data.date, onlyDate: true})
     } else if(!('date' in matterResult.data)) {
-      matterResult.data.date = DateTools.getIso8601z({onlyDate: true})
+      matterResult.data.date = null //DateTools.getIso8601z({onlyDate: true})
     }
 
     // fix cover to relative path
