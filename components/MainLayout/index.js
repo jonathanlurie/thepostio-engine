@@ -1,10 +1,9 @@
-import { Layout, Row, Col, Button, Menu, Dropdown } from 'antd'
-import { MenuOutlined, GithubOutlined } from '@ant-design/icons'
+import { Layout, Row, Col } from 'antd'
 import styles from './mainlayout.module.css'
 import Link from 'next/link'
 import Head from 'next/head'
 import TopLeftMenu from '../TopLeftMenu'
-const { Header, Footer, Sider, Content } = Layout
+const { Header, Footer, Content } = Layout
 
 
 class MainLayout extends React.Component {
@@ -52,15 +51,14 @@ class MainLayout extends React.Component {
           className={styles.header}
         >
           <Row
-            // align="middle"
           >
             <Col
-              span={8}
+              span={2}
             >
               <TopLeftMenu/>
             </Col>
             <Col
-              span={8}
+              span={20}
               justify='center'
             >
               <Link href='/'><a>
@@ -75,15 +73,8 @@ class MainLayout extends React.Component {
             </Col>
 
             <Col
-              span={8}
-              justify='right'
-              style={{
-                textAlign: 'right'
-              }}
+              span={2}
             >
-              <Link href='/thepostio/getting-started'><a>
-                  <Button type="link" style={{textAlign: 'center'}}>How to publish ?</Button>
-              </a></Link>
             </Col>
           </Row>
         </Header>
@@ -120,8 +111,10 @@ class MainLayout extends React.Component {
                 </Col>
 
                 <Col span={18} style={{textAlign: 'right'}}>
-                  <p>Created by <a href='https://twitter.com/jonathanlurie'>@jonathanlurie</a></p>
-                  <p>Fork it on <a href='https://github.com/thepostio/thepostio-engine'><GithubOutlined/></a></p>
+                  <p>
+                    Created by <a href='https://twitter.com/jonathanlurie'>@jonathanlurie</a> <br/>
+                    Fork it on <a href='https://github.com/thepostio/thepostio-engine'>GitHub</a>.
+                  </p>
                 </Col>
                 
               </Row>
